@@ -13,13 +13,14 @@ const Today = new Date();
 registerLocale('ja', ja);
 
 class Home extends React.Component {
-   state = { date: addDays(new Date(), 14), budget: '12000', departure: '1', duration: '90' }
+   state = { date: addDays(new Date(), 14), budget: '12000', departure: '1', duration: '90', plans: [], planCount: null }
   onFormSubmit = async (event) => {
      event.preventDefault();
      const response = await axios.get('https://l1kwik11ne.execute-api.ap-northeast-1.amazonaws.com/production/golf-courses', {
        params: { date: format(this.state.date, 'yyyyMMdd'), budget: this.state.budget, departure: this.state.departure, duration: this.state.duration }
      });
-     this.setState({ planCount: response.data.count, plans: response.data.plans })
+    //  this.setState({ planCount: response.data.count, plans: response.data.plans })
+     this.setState({ planCount: 0, plans: response.data.plans })
    }
   render() {
     return (
@@ -67,6 +68,7 @@ class Home extends React.Component {
           </form>
           <Result
             plans={this.state.plans}
+            planCount={this.state.planCount}
           />
         </div>
       </div>
