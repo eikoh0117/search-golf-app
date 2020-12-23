@@ -7,6 +7,8 @@ import "react-datepicker/dist/react-datepicker.css"
 import addDays from 'date-fns/addDays';
 import axios from 'axios';
 import format from 'date-fns/format';
+import Result from './Result';
+
 const Today = new Date();
 registerLocale('ja', ja);
 
@@ -63,6 +65,9 @@ class Home extends React.Component {
               </button>
             </div>
           </form>
+          <Result
+            plans={this.state.plans}
+          />
         </div>
       </div>
     );
